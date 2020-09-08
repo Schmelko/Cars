@@ -1,6 +1,7 @@
 from log import Log
 
 lines = [
+    
     '5 07:30 CEG300 590 30580 0',
     '5 14:16 CEG300 590 30656 1',
     '5 17:00 CEG300 534 30656 0',
@@ -15,3 +16,5 @@ with open('autok.txt') as f:
     log2 = Log(lines2)
 
 print(log2)
+
+print(log2.findlastcar1())

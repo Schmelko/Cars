@@ -7,3 +7,15 @@ class Log:
 
     def __str__(self):
         return "{} entries in log".format(len(self.entries))
+
+
+    def findlastcar1(self):
+        index = len(self.entries)-1
+        last_entry =self.entries[index]
+        return last_entry.day, last_entry.time, last_entry.plate
+        
+
+
+
+
+ 
