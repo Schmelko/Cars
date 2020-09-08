@@ -18,3 +18,5 @@ with open('autok.txt') as f:
 print(log2)
 
 print(log2.findlastcar1())
+
+print(log2.findentriesbyday('6'))

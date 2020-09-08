@@ -12,8 +12,10 @@ class Log:
         index = len(self.entries) - 1
         last_entry = self.entries[index]
         return last_entry.day, last_entry.time, last_entry.plate
-     
 
+    def findentriesbyday(self, day):
+        return [str(entry) for entry in self.entries if entry.day ==day]
+     
 
 
 
