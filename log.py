@@ -21,7 +21,6 @@ class Log:
 
     def plates_unique(self):
         return [set(entry.plate for entry in self.entries)]
-
     
-
- 
+    def outboundentriesbyendofmonth(self):
+        return [set(entry.plate for entry in self.entries)] ^ set([str(entry.plate) for entry in self.entries if entry.day == day and entry.direction == '1'])

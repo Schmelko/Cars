@@ -25,3 +25,4 @@ print(log2.findinboundentriesbylastdayofmonth('30'))
 
 print(log2.plates_unique())
 
+print(log2.outboundentriesbyendofmonth('30'))
