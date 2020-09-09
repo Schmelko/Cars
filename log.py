@@ -14,9 +14,14 @@ class Log:
         return last_entry.day, last_entry.time, last_entry.plate
 
     def findentriesbyday(self, day):
-        return [str(entry) for entry in self.entries if entry.day ==day]
-     
+        return [str(entry) for entry in self.entries if entry.day == day]
+    
+    def findinboundentriesbylastdayofmonth(self, day):
+         return [str(entry.plate) for entry in self.entries if entry.day == day and entry.direction == '1']
 
+    def plates_unique(self):
+        return [set(entry.plate for entry in self.entries)]
 
+    
 
  
