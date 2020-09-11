@@ -16,11 +16,14 @@ class Log:
     def findentriesbyday(self, day):
         return [str(entry) for entry in self.entries if entry.day == day]
     
-    def findinboundentriesbylastdayofmonth(self, day):
-         return [str(entry.plate) for entry in self.entries if entry.day == day and entry.direction == '1']
+    def findinboundentriesbylastdayofmonth(self):
+         return [str(entry.plate) for entry in self.entries if entry.day == '30' and entry.direction == '1']
 
     def plates_unique(self):
-        return [set(entry.plate for entry in self.entries)]
+        return set(entry.plate for entry in self.entries)
+
+    def plates_lastoutboundentriesbyendofmonth(self):
+        i = len(self.entries)-1
+        last_entry = self.entries[i]
+        return set(last_entry.plate for last_entry in self.entries if last_entry.direction !='1')
     
-    def outboundentriesbyendofmonth(self):
-        return [set(entry.plate for entry in self.entries)] ^ set([str(entry.plate) for entry in self.entries if entry.day == day and entry.direction == '1'])
