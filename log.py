@@ -27,3 +27,13 @@ class Log:
         last_entry = self.entries[i]
         return set(last_entry.plate for last_entry in self.entries if last_entry.direction !='1')
     
+    def findDirectionOnEndOfMonthByPlate(self, plate):
+        entries = tuple(entry for entry in self.entries if entry.plate == plate)
+        lastEntry = entries[-1]
+        return lastEntry.direction
+    
+    def findCarsNotInGarageOnEndOfMonth(self):
+        plates = self.plates_unique()
+        directionsByPlate = {plate:self.findDirectionOnEndOfMonthByPlate(plate) for plate in plates}
+        result = tuple(plate for plate, direction in directionsByPlate.items() if direction == '0')
+        return result

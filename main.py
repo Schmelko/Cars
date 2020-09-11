@@ -26,3 +26,5 @@ print(log2.findinboundentriesbylastdayofmonth())
 print(log2.plates_unique())
 
 print(log2.plates_lastoutboundentriesbyendofmonth())
+
+print(log2.findCarsNotInGarageOnEndOfMonth())
