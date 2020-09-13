@@ -14,7 +14,7 @@ class Log:
         return last_entry.day, last_entry.time, last_entry.plate
 
     def findentriesbyday(self, day):
-        return [str(entry) for entry in self.entries if entry.day == day]
+        return [entry for entry in self.entries if entry.day == day]
     
     def findinboundentriesbylastdayofmonth(self):
          return [str(entry.plate) for entry in self.entries if entry.day == '30' and entry.direction == '1']
