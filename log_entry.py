@@ -3,7 +3,12 @@ class LogEntry:
 
     def __init__(self, line):
         raw = line.split()
-        self.day, self.time, self.plate, self.person_id, self.odometer, self.direction = raw
+        self.day = int(raw[0])
+        self.time = raw[1]
+        self.plate = raw[2]
+        self.person_id = int(raw[3])
+        self.odometer = int(raw[4])
+        self.direction = int(raw[5])
   
     def __str__(self):
         format = "Day: {} Time: {} Plate: {} Person ID: {} Odometer: {} Direction: {}"
