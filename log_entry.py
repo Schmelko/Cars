@@ -15,4 +15,12 @@ class LogEntry:
             self.person_id, 
             self.odometer, 
             direction)
+    
+    def __eq__(self, other):
+        return (self.day == other.day 
+            and self.time == other.time 
+            and self.plate == other.plate 
+            and self.person_id == other.person_id 
+            and self.odometer == other.odometer 
+            and self.direction == other.direction)
         
