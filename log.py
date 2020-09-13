@@ -35,5 +35,23 @@ class Log:
     def findCarsNotInGarageOnEndOfMonth(self):
         plates = self.plates_unique()
         directionsByPlate = {plate:self.findDirectionOnEndOfMonthByPlate(plate) for plate in plates}
-        result = tuple(plate for plate, direction in directionsByPlate.items() if direction == '0')
+        result = tuple(plate for plate, direction in directionsByPlate.items() if direction == 0)
         return result
+    
+    def find_distance_in_month_by_plate1(self):
+        plates = self.plates_unique()
+        distances = dict()
+        for plate in plates:
+            entries = tuple(entry for entry in self.entries if entry.plate == plate)
+            first, last = entries[0].odometer, entries[-1].odometer
+            distances[plate] = last - first
+        
+        return distances
+
+    def find_distance_in_month_by_plate2(self):
+        return {plate: self.calculate_distance_by_plate(plate) for plate in self.plates_unique()}
+        
+    def calculate_distance_by_plate(self, plate):
+        entries = tuple(entry for entry in self.entries if entry.plate == plate)
+        first, last = entries[0].odometer, entries[-1].odometer
+        return last - first
