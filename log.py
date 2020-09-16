@@ -22,6 +22,9 @@ class Log:
     def plates_unique(self):
         return set(entry.plate for entry in self.entries)
 
+    def persons_unique(self):
+        return set(entry.person_id for entry in self.entries)
+
     def plates_lastoutboundentriesbyendofmonth(self):
         i = len(self.entries)-1
         last_entry = self.entries[i]
