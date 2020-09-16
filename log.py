@@ -58,3 +58,39 @@ class Log:
         entries = tuple(entry for entry in self.entries if entry.plate == plate)
         first, last = entries[0].odometer, entries[-1].odometer
         return last - first
+
+    def find_max_distance_by_plate_and_person(self):
+        distances = dict()
+        for plate in self.plates_unique():
+            for person_id in self.persons_unique():
+                entries = tuple(entry for entry in self.entries if entry.plate == plate and entry.person_id == person_id)
+                if entries:
+                    distances[plate, person_id] = self.calculate_max_distance(entries)
+
+        person_id, distance = 1, float('-inf')
+        for key, value in distances.items():
+            if value > distance:
+                person_id, distance = key[1], value
+
+        return person_id, distance
+
+    def calculate_max_distance(self, entries):
+        if len(entries) < 2:
+            return float('-inf')
+        if entries[0].direction == 1:
+            entries = entries[1:]
+        if entries[-1].direction == 0:
+            entries = entries[:-2]
+        if len(entries) < 2:
+            return float('-inf')
+        
+        distances = self.calculate_distances(entries)
+        return max(distances)
+
+    def calculate_distances(self, entries):
+        distances = []
+        while len(entries) >= 2:
+            distances.append(entries[1].odometer - entries[0].odometer)
+            entries = entries[2:]
+
+        return tuple(distances)
