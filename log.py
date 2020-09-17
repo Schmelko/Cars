@@ -24,11 +24,6 @@ class Log:
 
     def persons_unique(self):
         return set(entry.person_id for entry in self.entries)
-
-    def plates_lastoutboundentriesbyendofmonth(self):
-        i = len(self.entries)-1
-        last_entry = self.entries[i]
-        return set(last_entry.plate for last_entry in self.entries if last_entry.direction !='1')
     
     def findDirectionOnEndOfMonthByPlate(self, plate):
         entries = tuple(entry for entry in self.entries if entry.plate == plate)
@@ -36,15 +31,12 @@ class Log:
         return lastEntry.direction
     
     def findCarsNotInGarageOnEndOfMonth(self):
-        plates = self.plates_unique()
-        directionsByPlate = {plate:self.findDirectionOnEndOfMonthByPlate(plate) for plate in plates}
-        result = tuple(plate for plate, direction in directionsByPlate.items() if direction == 0)
-        return result
+        directionsByPlate = {plate:self.findDirectionOnEndOfMonthByPlate(plate) for plate in self.plates_unique()}
+        return tuple(plate for plate, direction in directionsByPlate.items() if direction == 0)
     
     def find_distance_in_month_by_plate1(self):
-        plates = self.plates_unique()
         distances = dict()
-        for plate in plates:
+        for plate in self.plates_unique():
             entries = tuple(entry for entry in self.entries if entry.plate == plate)
             first, last = entries[0].odometer, entries[-1].odometer
             distances[plate] = last - first
