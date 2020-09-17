@@ -117,7 +117,6 @@ class Log:
 
         return driving_log
 
-
     def _find_entries_by_plate(self, plate):
         return tuple(entry for entry in self.entries if entry.plate == plate)
 

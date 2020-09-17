@@ -8,6 +8,17 @@ def format2_task5(log):
     for key, value in log.items():
         print('{}: {}km'.format(key, value))
 
+def print_task7(driving_log):
+    for entry in driving_log['entries']:
+        print("{}\t{}.\t{}\t{} km\t{}.\t{}\t{} km".format(
+            entry['person_id'],
+            entry['start']['day'],
+            entry['start']['time'],
+            entry['start']['odometer'],
+            entry['end']['day'],
+            entry['end']['time'],
+            entry['end']['odometer']))
+
 lines = [
     
     '5 07:30 CEG300 590 30580 0',
@@ -44,4 +55,7 @@ format2_task5(result_task5)
 print(log2.find_max_distance_by_plate_and_person())
 """
 
-print(log2.create_driving_log_by_plate('CEG300'))
+result = log2.create_driving_log_by_plate('CEG300')
+print(result)
+
+print(print_task7(result))
