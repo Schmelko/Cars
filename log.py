@@ -86,3 +86,49 @@ class Log:
             entries = entries[2:]
 
         return tuple(distances)
+
+    def create_driving_log_by_plate(self, plate):
+        ''' Task #7 '''
+
+        entries = self._find_entries_by_plate(plate)
+        entries = self._sanitize_entries(entries)
+
+        driving_log = {
+            'plate': plate,
+            'entries': []
+        }
+
+        while len(entries) >= 2:
+            driving_log_entry = {
+                'person_id': entries[0].person_id,
+                'start': {
+                    'day': entries[0].day,
+                    'time': entries[0].time,
+                    'odometer': entries[0].odometer
+                },
+                'end': {
+                    'day': entries[1].day,
+                    'time': entries[1].time,
+                    'odometer': entries[1].odometer
+                }
+            }
+            driving_log['entries'].append(driving_log_entry)
+            entries = entries[2:]
+
+        return driving_log
+
+
+    def _find_entries_by_plate(self, plate):
+        return tuple(entry for entry in self.entries if entry.plate == plate)
+
+    def _sanitize_entries(self, entries):
+        if len(entries) < 2:
+            return tuple()
+        if entries[0].direction == 1:
+            entries = entries[1:]
+        if entries[-1].direction == 0:
+            entries = entries[:-2]
+        if len(entries) < 2:
+            return tuple()
+
+        return entries

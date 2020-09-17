@@ -41,6 +41,7 @@ result_task5 = log2.find_distance_in_month_by_plate1()
  
 format1_task5(result_task5)
 format2_task5(result_task5)
+print(log2.find_max_distance_by_plate_and_person())
 """
 
-print(log2.find_max_distance_by_plate_and_person())
+print(log2.create_driving_log_by_plate('CEG300'))
