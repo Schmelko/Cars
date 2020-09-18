@@ -34,15 +34,6 @@ class Log:
         directionsByPlate = {plate:self.findDirectionOnEndOfMonthByPlate(plate) for plate in self.plates_unique()}
         return tuple(plate for plate, direction in directionsByPlate.items() if direction == 0)
     
-    def find_distance_in_month_by_plate1(self):
-        distances = dict()
-        for plate in self.plates_unique():
-            entries = tuple(entry for entry in self.entries if entry.plate == plate)
-            first, last = entries[0].odometer, entries[-1].odometer
-            distances[plate] = last - first
-        
-        return distances
-
     def find_distance_in_month_by_plate2(self):
         return {plate: self.calculate_distance_by_plate(plate) for plate in self.plates_unique()}
         
